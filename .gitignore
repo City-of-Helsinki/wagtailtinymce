@@ -1,7 +1,9 @@
+*.egg-info
+/.tx
 /bin
 /include
 /lib
 /lib64
 /local
-/.tx
 /translations
+__pycache__
