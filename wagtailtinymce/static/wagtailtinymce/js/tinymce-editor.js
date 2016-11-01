@@ -47,13 +47,15 @@ function registerMCETool(name) {
 }
 
 function makeTinyMCEEditable(id, kwargs) {
-
     kwargs = kwargs || {};
+    var plugins = (mcePlugins || []).concat(kwargs.plugins || []);
+    var tools = (mceTools || []).concat(kwargs.tools || []);
+    var external_plugins = $.extend({}, (mceExternalPlugins || {}), (kwargs.external_plugins || []));
     $.extend(kwargs, {
-        selector: '#' + id.toString(),
-        plugins: mcePlugins,
-        tools: mceTools,
-        external_plugins: mceExternalPlugins,
+        selector: '#' + id,
+        plugins: plugins,
+        tools: tools,
+        external_plugins: external_plugins,
         setup: function (editor) {
             editor.on('change', function () {
                 editor.save();
