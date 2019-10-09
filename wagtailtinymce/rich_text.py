@@ -105,7 +105,7 @@ class TinyMCERichTextArea(WidgetWithScript, widgets.Textarea):
     def get_panel(self):
         return RichTextFieldPanel
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             translated_value = None
         else:
@@ -113,7 +113,7 @@ class TinyMCERichTextArea(WidgetWithScript, widgets.Textarea):
                 translated_value = self.converter.from_database_format(value)
             else:
                 translated_value = expand_db_html(value, for_editor=True)
-        return super(TinyMCERichTextArea, self).render(name, translated_value, attrs)
+        return super(TinyMCERichTextArea, self).render(name, translated_value, attrs, renderer)
 
     def render_js_init(self, id_, name, value):
         return "{0}({1}, {2});".format(
